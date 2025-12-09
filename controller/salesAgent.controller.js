@@ -45,3 +45,17 @@ exports.getSalesAgentById = async(req,res)=>{
         res.status(500).json({message:"Server Error", error: error.message})
     }
 }
+
+//delete by id
+exports.deleteAgent = async(req,res)=>{
+    try {
+        const salesId = req.params.id;
+        const deleteId = await SalesAgent.findByIdAndDelete(salesId)
+        if(!deleteId){
+            res.status(404).json({message:`Agent with ${salesId} not found`})
+        }
+        res.status(200).json({message:"sales agent delete successfully"})
+    } catch (error) {
+        res.status(500).json({message:error.message})
+    }
+}

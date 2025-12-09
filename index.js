@@ -31,6 +31,9 @@ app.use("/api/leads",leadRoute)
 const commentRoute = require("./routes/comment.routes")
 app.use("/api/comments",commentRoute)
 
+//report router
+const reportRoute = require("./routes/reportRoute")
+app.use("/api/reports",reportRoute)
 const PORT = 3000;
 app.listen(PORT,()=>{
     console.log(`Server is running on port ${PORT}`)
