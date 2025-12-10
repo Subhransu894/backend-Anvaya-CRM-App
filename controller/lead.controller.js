@@ -28,7 +28,7 @@ exports.createLead = async(req,res)=>{
 //get all leads
 exports.getAllLeads= async(req,res)=>{
     try {
-        const lead = await Lead.find();
+        const lead = await Lead.find().populate("salesAgent");
         res.status(201).json({lead})
     } catch (error) {
         res.status(500).json({message:"Server Error",error:error.message})
@@ -39,7 +39,7 @@ exports.getAllLeads= async(req,res)=>{
 exports.getLeadById = async(req,res)=>{
     try {
         const {id} = req.params;
-        const lead = await Lead.findById(id)
+        const lead = await Lead.findById(id).populate("salesAgent")
         if(!lead){
             return res.status(404).json({message:"Lead can't found"})
         }
@@ -55,7 +55,7 @@ exports.updateLead = async(req,res)=>{
         const leadId = req.params.id
         const update = req.body
 
-        const updatedLead = await Lead.findByIdAndUpdate(leadId,update,{new:true})
+        const updatedLead = await Lead.findByIdAndUpdate(leadId,update,{new:true}).populate("salesAgent")
         if(!updatedLead){
            return res.status(404).json({message:"Lead not found"})
         }
