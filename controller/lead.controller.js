@@ -3,18 +3,17 @@ const Lead = require("../models/lead.models")
 //create lead
 exports.createLead = async(req,res)=>{
     try {
-        const{name,source,salesAgent,status,tags,timeToClose,priority}=req.body;
+        const{name,source,status,tags,timeToClose,priority}=req.body;
         if(!name || name.trim() === "" ||
             !source || source.trim() === "" ||
-            !salesAgent ||
             !status || status.trim() === "" ||
             !Array.isArray(tags) || tags.length === 0 ||
             timeToClose === undefined || timeToClose === null ||
             priority === undefined || priority === null || priority.trim() === ""){
-            return res.status(404).json({message:"All fields (name,source,salesAgent,status,tags,timeToClose,priority) required"})
+            return res.status(400).json({message:"All fields (name,source,status,tags,timeToClose,priority) required"})
         }
         const lead = new Lead({
-            name,source,salesAgent,status,tags,timeToClose,priority
+            name,source,salesAgent:req.user.id,status,tags,timeToClose,priority
         })
         // console.log("Lead",lead)
         await lead.save()

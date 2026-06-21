@@ -9,6 +9,10 @@ const salesAgentSchema = new mongoose.Schema({
         required:[true,'Sales Agent email is required'],
         unique:true,
     },
+    password:{
+        type:String,
+        required:[true,'password is required'],
+    },
     createdAt:{
         type:Date,
         default:Date.now,

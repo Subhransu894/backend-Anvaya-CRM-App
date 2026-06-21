@@ -8,7 +8,7 @@ const commentSchema = new mongoose.Schema({
     author:{
         type: mongoose.Schema.Types.ObjectId,
         ref:'SalesAgent',
-        required:[true,'SalesAgent(author) refrence is required']
+        required:[true,'Author refrence is required']
     },
     commentText:{
         type:String,

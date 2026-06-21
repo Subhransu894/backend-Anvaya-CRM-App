@@ -1,6 +1,6 @@
 const express = require("express")
 const app = express()
-
+require("dotenv").config()
 const cors = require("cors")
 const corOption = {
     origin:"*",
@@ -34,6 +34,11 @@ app.use("/api/comments",commentRoute)
 //report router
 const reportRoute = require("./routes/reportRoute")
 app.use("/api/reports",reportRoute)
+
+//auth router
+const authRouter = require("./routes/auth.routes")
+app.use("/api/auth",authRouter)
+
 const PORT = 3000;
 app.listen(PORT,()=>{
     console.log(`Server is running on port ${PORT}`)
